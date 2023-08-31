@@ -35,8 +35,8 @@ export default async function authenticationMiddleware(
     })
   }
 
-  // Send user to request headers for microservices
-  req.headers.user = JSON.stringify(user)
+  // Send base64 user via request headers for microservice
+  req.headers.user = Buffer.from(JSON.stringify(user)).toString('base64')
 
   return next()
 }
